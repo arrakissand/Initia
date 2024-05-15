@@ -177,6 +177,25 @@ initiad tx mstaking create-validator \
 
 > Hayırlı olsun, repoyu zamanla güncelleyeceğim ve node görevlerini ekleyeceğim bu repo'ya dosya olarak.
 
+## Yeni versiyona güncelleme
+> Vesrsyonunuzu kontrol edin
+initiad version
+> 
+cd $HOME
+rm -rf initia
+git clone https://github.com/initia-labs/initia.git
+cd initia
+git checkout v0.2.12
+make build
+
+mv build/initiad $HOME/.initia/cosmovisor/genesis/bin/
+rm -rf build
+
+sudo ln -s $HOME/.initia/cosmovisor/genesis $HOME/.initia/cosmovisor/current -f
+sudo ln -s $HOME/.initia/cosmovisor/current/bin/initiad /usr/local/bin/initiad -f
+
+sudo systemctl restart initia.service && sudo journalctl -u initia.service -f --no-hostname -o cat
+
 ## Görevler
 
 > Görev-1: [Oracle](https://github.com/ruesandora/Initia/blob/main/%231-Oracle.md)
